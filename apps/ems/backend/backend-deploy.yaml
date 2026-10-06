@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: backend
-          image: 015911059278.dkr.ecr.us-west-2.amazonaws.com/ems-backend:latest
+          image: 015911059278.dkr.ecr.us-west-2.amazonaws.com/ems-backend:v1.0.0
           ports: 
           - containerPort: 5000
 

@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: ems-frontend
-          image: 015911059278.dkr.ecr.us-west-2.amazonaws.com/ems-frontend:latest
+          image: 015911059278.dkr.ecr.us-west-2.amazonaws.com/ems-frontend:v1.0.0
 
           ports:
             - containerPort: 80

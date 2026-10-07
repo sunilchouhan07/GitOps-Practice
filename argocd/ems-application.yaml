@@ -12,8 +12,6 @@ spec:
     targetRevision: HEAD
     path: helm/ems
 
-    directory:
-      recurse: true
 
   destination:
     server: https://kubernetes.default.svc

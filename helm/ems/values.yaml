@@ -37,7 +37,7 @@ backend:
 
 
 frontend:
-  replicaCount: 2
+  replicaCount: 1
 
   image:
     repository: 015911059278.dkr.ecr.us-west-2.amazonaws.com/ems-frontend

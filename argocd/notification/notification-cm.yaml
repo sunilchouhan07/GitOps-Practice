@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: argocd-notification-cm
+  namespace: argocd
+
+data:
+  service.webhook.webhooksite: |
+    url: https://webhook.site/bc659fac-c0ce-4d05-a52f-95ae9f73b826
+    headers:
+      - name: Content-Type
+        value: application/json
+
+  template.app-deployed-webhook: |
+    webhook:
+      webhooksite:
+        method: POST
+        body: |
+          {
+            "application": "{{.app.metadata.name}}",
+            "sync_status": "{{.app.status.sync.status}}",
+            "health_status": "{{.app.status.health.status}}",
+            "revision": "{{.app.status.sync.revision}}"
+          }
+
+  trigger.on-deployed: |
+    - description: Application successfully deployed
+      oncePer: app.status.sync.revision
+      send:
+        - app-deployed-webhook
+      when: app.status.operationState.phase in ['Succeeded'] and app.status.health.status == 'Healthy'

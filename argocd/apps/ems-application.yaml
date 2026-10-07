@@ -1,27 +1,25 @@
 apiVersion: argoproj.io/v1alpha1
-kind: Application 
+kind: Application
 metadata:
-  name: root-app
+  name: ems
   namespace: argocd
-
+  annotations:
+    notifications.argoproj.io/subscribe.on-deployed.webhooksite: ""
 spec:
-  project: default
+  project: ems-project
+
   source:
     repoURL: https://github.com/sunilchouhan07/GitOps-Practice.git
     targetRevision: HEAD
-    path: argocd
+    path: helm/ems
 
-    directory:
-      recurse: true
 
   destination:
     server: https://kubernetes.default.svc
-    namespace: argocd
+    namespace: ems
 
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
-
-      
 

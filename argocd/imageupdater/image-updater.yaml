@@ -1,0 +1,28 @@
+apiVersion: argocd-image-updater.argoproj.io/v1alpha1
+kind: ImageUpdater
+metadata:
+  name: ems-image-updater
+  namespace: argocd
+
+spec:
+  applicationRefs:
+    - namePattern: ems
+      images:
+        - alias: backend
+          imageName: 015911059278.dkr.ecr.us-west-2.amazonaws.com/ems-backend:~1.0
+
+          commonUpdateSettings:
+            updateStrategy: semver
+            pullSecret: pullsecret:argocd/ecr-creds
+
+          manifestTargets: 
+            helm:
+              name: backend.image.repository
+              tag: backend.image.tag
+
+
+  writeBackConfig:
+    method: "git:secret:git-creds"
+    gitConfig:
+      branch: "main"
+      writeBackTarget: "helmvalues.values.yaml"

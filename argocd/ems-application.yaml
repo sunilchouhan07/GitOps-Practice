@@ -10,7 +10,7 @@ spec:
   source:
     repoURL: https://github.com/sunilchouhan07/GitOps-Practice.git
     targetRevision: HEAD
-    path: apps/ems
+    path: helm/ems
 
     directory:
       recurse: true

@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ems-backend
+  namespace: ems
+
+spec:
+  replicas: {{ .Values.backend.replicaCount }}
+
+  selector:
+    matchLabels:
+      app: ems-backend
+
+  template:
+    metadata:
+      labels:
+        app: ems-backend
+
+    spec:
+      containers: 
+        - name: ems-backend
+          image: {{ .Values.backend.image.repository }}:{{ .Values.backend.image.tag }}
+          imagePullPolicy: {{ .Values.backend.image.pullPolicy }}
+
+
+          ports:
+            - containerPort: 5000
+
+          env:
+            - name: DB_NAME
+              value: {{ .Values.backend.env.dbName | quote }}
+
+            - name: DB_PORT
+              value: {{ .Values.backend.env.dbPort | quote }} 
+            - name: DB_HOST
+              value: {{ .Values.backend.env.dbHost | quote }}
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: POSTGRES_USER
+
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: POSTGRES_PASSWORD
+
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+
+            limits:
+              cpu: 500m
+              memory: 256Mi

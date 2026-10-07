@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ems-frontend
+  namespace: ems
+
+spec:
+  replicas: {{ .Values.frontend.replicaCount }}
+
+  selector:
+    matchLabels:
+      app: ems-frontend
+
+  template:
+    metadata:
+      labels:
+        app: ems-frontend
+
+    spec:
+      containers:
+        - name: ems-frontend
+          image: {{ .Values.frontend.image.repository }}:{{ .Values.frontend.image.tag }}
+          imagePullPolicy: {{ .Values.frontend.image.pullPolicy }}
+          ports:
+            - containerPort: 80
+
+          resources:
+            requests:
+              cpu: 100m
+              memory: 64Mi
+
+            limits:
+              cpu: 250m
+              memory: 128Mi

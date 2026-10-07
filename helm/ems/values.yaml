@@ -1,0 +1,50 @@
+postgres:
+  replicaCount: 2
+
+  image: 
+    repository: postgres
+    tag: "17"
+    pullPolicy: IfNotPresent
+
+
+  service:
+    type: ClusterIP
+    port: 5432
+    targetPort: 5432
+
+  env:
+    database: employee
+
+
+backend:
+  replicaCount: 2
+  
+  image:
+    repository: 015911059278.dkr.ecr.us-west-2.amazonaws.com/ems-backend
+    tag: v1.0.0
+    pullPolicy: IfNotPresent
+
+  service:
+    type: ClusterIP
+    port: 5000
+    targetPort: 5000
+
+  env:
+    dbName: employee
+    dbPort: "5432"
+    dbHost: ems-postgres
+
+
+frontend:
+  replicaCount: 2
+
+  image:
+    repository: 015911059278.dkr.ecr.us-west-2.amazonaws.com/ems-frontend
+
+    tag: v1.0.0
+    pullPolicy: IfNotPresent
+
+  service:
+    type: ClusterIP
+    port: 80
+    targetPort: 80

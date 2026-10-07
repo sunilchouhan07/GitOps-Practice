@@ -21,7 +21,7 @@ backend:
   
   image:
     repository: 015911059278.dkr.ecr.us-west-2.amazonaws.com/ems-backend
-    tag: v1.0.0
+    tag: v1.0.1
     pullPolicy: IfNotPresent
 
   service:

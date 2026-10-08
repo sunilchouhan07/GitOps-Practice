@@ -5,7 +5,7 @@ metadata:
   namespace: argocd
 
 spec:
-  project: GitOps-Project
+  project: gitops
   source:
     repoURL: https://github.com/sunilchouhan07/GitOps-Practice.git
     targetRevision: main

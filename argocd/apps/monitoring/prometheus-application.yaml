@@ -1,21 +1,20 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: ems
+  name: prometheus
   namespace: argocd
 
 spec:
   project: gitops
 
   source:
-    repoURL: https://github.com/sunilchouhan07/GitOps-Practice.git
-    targetRevision: main
-    path: helm/ems
-
+    repoURL: https://prometheus-community.github.io/helm-charts
+    chart: prometheus
+    targetRevision: 27.37.0
 
   destination:
     server: https://kubernetes.default.svc
-    namespace: ems
+    namespace: monitoring
 
   syncPolicy:
     automated:
@@ -24,3 +23,4 @@ spec:
 
     syncOptions:
       - CreateNamespace=true
+

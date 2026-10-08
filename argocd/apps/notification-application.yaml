@@ -1,26 +1,22 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: ems
+  name: notifications
   namespace: argocd
 
 spec:
   project: gitops
 
   source:
-    repoURL: https://github.com/sunilchouhan07/GitOps-Practice.git
-    targetRevision: main
-    path: helm/ems
-
+    repoURL: https://argoproj.github.io/argo-helm
+    chart: argocd-notifications
+    targetRevision: 1.8.0
 
   destination:
     server: https://kubernetes.default.svc
-    namespace: ems
+    namespace: argocd
 
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
-
-    syncOptions:
-      - CreateNamespace=true

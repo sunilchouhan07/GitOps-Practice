@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: gitops
+  namespace: argocd
+
+spec:
+  description: GitOps project for EMS and platform components
+  sourceRepos:
+    - https://github.com/sunilchouhan07/GitOps-Practice.git
+    - https://argoproj.github.io/argo-helm
+    - https://prometheus-community.github.io/helm-charts
+    - https://grafana.github.io/helm-charts
+
+  destinations:
+    - server: https://kubernetes.default.svc
+      namespace: ems
+
+    - server: https://kubernetes.default.svc
+      namespace: argocd
+
+    - server: https://kubernetes.default.svc
+      namespace: monitoring
+
+  namespaceResourceWhitelist:
+    - group: "*"
+      kind: "*"

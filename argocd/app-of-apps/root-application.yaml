@@ -5,10 +5,10 @@ metadata:
   namespace: argocd
 
 spec:
-  project: default
+  project: GitOps-Project
   source:
     repoURL: https://github.com/sunilchouhan07/GitOps-Practice.git
-    targetRevision: HEAD
+    targetRevision: main
     path: argocd/apps
 
     directory:

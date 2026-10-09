@@ -21,8 +21,8 @@ backend:
   replicaCount: 2
   
   image:
-    repository: 015911059278.dkr.ecr.us-west-2.amazonaws.com/ems-backend
-    tag: v1.0.2
+    repository: 015911059278.dkr.ecr.ap-south-1.amazonaws.com/ems-backend
+    tag: v1.0.0
     pullPolicy: IfNotPresent
 
   service:
@@ -40,7 +40,7 @@ frontend:
   replicaCount: 1
 
   image:
-    repository: 015911059278.dkr.ecr.us-west-2.amazonaws.com/ems-frontend
+    repository: 015911059278.dkr.ecr.ap-south-1.amazonaws.com/ems-frontend
 
     tag: v1.0.0
     pullPolicy: IfNotPresent

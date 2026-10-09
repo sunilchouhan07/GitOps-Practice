@@ -1,3 +1,4 @@
+
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
@@ -35,6 +36,17 @@ spec:
           storage:
             type: filesystem
 
+          commonStorageConfig:
+            filesystem:
+              chunks_directory: /tmp/loki/chunks
+              rules_directory: /tmp/loki/rules
+
+          rulerConfig:
+            storage:
+              type: local
+              local:
+                directory: /tmp/loki/rules
+
         singleBinary:
           replicas: 1
           persistence:
@@ -52,6 +64,15 @@ spec:
         gateway:
           enabled: false
 
+        chunksCache:
+          enabled: false
+
+        resultsCache:
+          enabled: false
+
+        lokiCanary:
+          enabled: false
+
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring
@@ -63,3 +84,4 @@ spec:
 
     syncOptions:
       - CreateNamespace=true
+

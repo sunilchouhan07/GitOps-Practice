@@ -12,6 +12,20 @@ spec:
     chart: prometheus
     targetRevision: 27.37.0
 
+    helm:
+      values: |
+        server:
+          persistentVolume:
+            enabled: true
+            storageClass: ebs-gp3
+            size: 8Gi
+        
+        alertmanager:
+          persistentVolume:
+            enabled: true
+            storageClass: ebs-gp3
+            size: 2Gi
+
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring

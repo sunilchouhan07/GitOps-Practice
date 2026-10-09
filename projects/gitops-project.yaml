@@ -1,11 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
-<<<<<<< HEAD
   name: gitops
-=======
-  name: GitOps-Project
->>>>>>> f17d3051f279d2d2b4e5f89f4fea5f254e7bd67e
   namespace: argocd
 
 spec:
@@ -27,5 +23,9 @@ spec:
       namespace: monitoring
 
   namespaceResourceWhitelist:
+    - group: "*"
+      kind: "*"
+
+  clusterResourceWhitelist:
     - group: "*"
       kind: "*"
